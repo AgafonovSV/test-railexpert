@@ -15,7 +15,7 @@
 			</p>
 			<p>
 				<label for="email">Email: </label>
-				<input id="email" v-model="email" placeholder="email">
+				<input id="email" v-model="email" placeholder="email" type="email" required>
 			</p>
 			<p>
 				<label for="description">Description: </label>
