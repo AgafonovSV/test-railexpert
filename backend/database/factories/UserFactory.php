@@ -27,15 +27,15 @@ class UserFactory extends Factory
         $desc = ['php', 'js', 'golang', 'java'];
         $randKeys = (array) array_rand($desc, rand(1,4));
 
-        foreach ($randKeys as $key) {
-            $descArr[] = $desc[$key];
+        foreach ($randKeys as $val) {
+            $descArr[] = $desc[$val];
         }
 
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'description' => json_encode($descArr),
+            'description' => trim(implode(', ', $descArr), '"'),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
