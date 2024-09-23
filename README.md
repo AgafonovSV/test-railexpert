@@ -10,7 +10,11 @@
 
 3. `php artisan db:seed --class=UserSeeder`
 
+4. `php artisan serve`
+
 ### frontend (vue) npm 10.8.3:
+#### установка:
+папка **frontend-vue**
 
 1. `npm install`
 
