@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Users\Presenters\ApiPresenter;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,19 +24,13 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $descArr = [];
-        $desc = ['php', 'js', 'golang', 'java'];
-        $randKeys = (array) array_rand($desc, rand(1,4));
-
-        foreach ($randKeys as $val) {
-            $descArr[] = $desc[$val];
-        }
+        $desc = new ApiPresenter();
 
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'description' => trim(implode(', ', $descArr), '"'),
+            'description' => $desc->userDescription(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

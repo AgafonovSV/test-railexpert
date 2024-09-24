@@ -3,21 +3,21 @@
 <template>
 	<div class="form-wrap">
 		<form class="user-form" @submit.prevent="onSubmit">
-			<p v-if="errors.length">
+			<div v-if="errors.length">
 				<b>Please correct the following error(s):</b>
 				<ul class="errors">
 					<li v-for="error in errors">{{ error }}</li>
 				</ul>
-			</p>
-			<p>
+			</div>
+			<div>
 				<label for="name">Name: </label>
-				<input id="name" v-model="name" placeholder="name" type="number">
-			</p>
-			<p>
+				<input id="name" v-model="name" placeholder="name">
+			</div>
+			<div>
 				<label for="email">Email: </label>
 				<input id="email" v-model="email" placeholder="email" type="email" required>
-			</p>
-			<p>
+			</div>
+			<div>
 				<label for="description">Description: </label>
 				<select id="description" v-model="description">
 					<option>php</option>
@@ -25,10 +25,10 @@
 					<option>golang</option>
 					<option>java</option>
 				</select>
-			</p>
-			<p>
+			</div>
+			<div>
 				<input type="submit" value="Add">
-			</p>
+			</div>
 		</form>
 	</div>
 </template>
@@ -66,13 +66,14 @@ export default {
 		addUser(userData) {
 			fetch(this.$url +
 					'api/users/create?name='+ userData.name +
-					'&email=' + userData.name +
+					'&email=' + userData.email +
 					'&description=' + userData.description, {
 				method: "GET",
+				accept: "application/json",
 			})
 					.then((response) => {
 						response.json().then((e) => {
-							console.log(e.data);
+							console.log(e);
 						});
 					})
 					.catch((err) => {
@@ -86,6 +87,9 @@ export default {
 <style>
 .form-wrap {
 	text-align: left;
+}
+.user-form div {
+	padding: 5px 0;
 }
 .errors {
 	color: indianred;
